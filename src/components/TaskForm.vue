@@ -1,5 +1,8 @@
 <template>
   <form class="task-form">
+    <router-link :to="{ name: 'home' }" class="home-icon"
+      ><i class="fas fa-home"></i
+    ></router-link>
     <h3>Create New Task</h3>
     <!-- Form fields -->
     <div class="form-group">
@@ -41,6 +44,7 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-top: 20px;
+  position: relative;
 }
 
 h3 {
@@ -75,5 +79,18 @@ select {
 
 .form-actions button:hover {
   background-color: #2980b9;
+}
+.home-icon {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 24px;
+  color: #3498db;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.home-icon:hover {
+  color: #2980b9;
 }
 </style>
