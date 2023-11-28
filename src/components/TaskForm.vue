@@ -1,9 +1,11 @@
 <template>
   <form class="task-form">
-    <router-link :to="{ name: 'home' }" class="home-icon"
-      ><i class="fas fa-home"></i
-    ></router-link>
-    <h3>Create New Task</h3>
+    <h3 class="create-task-heading">
+      Create New Task
+      <router-link :to="{ name: 'home' }" class="home-icon">
+        <fa icon="home" />
+      </router-link>
+    </h3>
     <!-- Form fields -->
     <div class="form-group">
       <label for="title">Title:</label>
@@ -40,14 +42,19 @@
 /* Styles for Task Form component */
 
 .task-form {
+  width: 75%;
+  max-width: 750px;
+  margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-top: 20px;
-  position: relative;
 }
 
-h3 {
+.create-task-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 20px;
   font-size: 20px;
 }
@@ -81,11 +88,10 @@ select {
   background-color: #2980b9;
 }
 .home-icon {
-  position: absolute;
   top: 20px;
   left: 20px;
   font-size: 24px;
-  color: #3498db;
+  color: #2a2e31;
   text-decoration: none;
   transition: color 0.3s;
 }
