@@ -1,5 +1,5 @@
 <template>
-  <form class="task-form">
+  <form class="task-form" @submit.prevent="submitTask">
     <h3 class="create-task-heading">
       Create New Task
       <router-link :to="{ name: 'home' }" class="home-icon">
@@ -9,19 +9,19 @@
     <!-- Form fields -->
     <div class="form-group">
       <label for="title">Title:</label>
-      <input type="text" id="title" required />
+      <input type="text" id="title" required v-model="newTask.title" />
     </div>
     <div class="form-group">
       <label for="description">Description:</label>
-      <textarea id="description"></textarea>
+      <textarea id="description" v-model="newTask.discriptions"></textarea>
     </div>
     <div class="form-group">
       <label for="dueDate">Due Date:</label>
-      <input type="date" id="dueDate" required />
+      <input type="date" id="dueDate" required v-model="newTask.date" />
     </div>
     <div class="form-group">
       <label for="status">Status:</label>
-      <select id="status" required>
+      <select id="status" required v-model="newTask.status">
         <option value="To-Do">To-Do</option>
         <option value="In Progress">In Progress</option>
         <option value="Completed">Completed</option>
@@ -35,7 +35,19 @@
 </template>
 
 <script setup>
-// No logic provided for brevity
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
+
+const newTask = ref({
+  title: "",
+  discriptions: "",
+  date: "",
+  status: "",
+});
+const submitTask = () => {
+  router.push({ name: "home" });
+};
 </script>
 
 <style scoped>
