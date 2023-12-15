@@ -9,27 +9,79 @@
         >Add Tasks</Router-Link
       >
     </div>
-    <ul class="task-items">
-      <!-- Existing task list items -->
-      <!-- ... -->
-    </ul>
+    <div class="task-cards">
+      <div
+        v-for="task in tasks"
+        :key="task.id"
+        class="task-card"
+        :style="{
+          backgroundColor: getRandomColor(),
+          color: getContrastColor(),
+        }"
+      >
+        <h3>{{ task.title }}</h3>
+        <p>{{ task.description }}</p>
+        <p>Due Date: {{ task.dueDate }}</p>
+        <p>Status: {{ task.status }}</p>
+      </div>
+    </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useTaskStore } from "@/Stores/TaskStore";
+
+const store = useTaskStore();
+const tasks = store.tasks;
+
+// Function to generate a random color
+const getRandomColor = () => {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+};
+const getContrastColor = () => {
+  const bgColor = getRandomColor();
+  // Calculate brightness using relative luminance formula
+  const brightness =
+    (parseInt(bgColor.substr(1, 2), 16) * 299 +
+      parseInt(bgColor.substr(3, 2), 16) * 587 +
+      parseInt(bgColor.substr(5, 2), 16) * 114) /
+    1000;
+
+  return brightness > 125 ? "#333" : "#fff"; // Use dark or light text color based on brightness
+};
+</script>
 
 <style scoped>
-/* Styles for Task List component */
-
+/* Styles for Task Cards */
 .task-list {
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
 }
 
 .list-header {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
+}
+.task-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+.task-card {
+  padding: 20px;
+  border-radius: 10px;
+  width: 250px;
+  color: rgb(150, 139, 139);
 }
 
 .add-tasks-btn {

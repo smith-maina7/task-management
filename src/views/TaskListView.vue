@@ -1,28 +1,25 @@
 <template>
   <div class="task-list-view">
     <h2>Task Management</h2>
-    <!-- Task Form (not implemented in this example) -->
-    <!-- <TaskForm /> -->
-
-    <TaskList :tasks="tasks" />
+    <TaskList />
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
+// import { ref } from "vue";
 import TaskList from "@/components/TaskList.vue"; // Import the TaskList component
 
 // Dummy tasks data for demonstration
-const tasks = ref([
-  {
-    id: 1,
-    title: "Complete Project Proposal",
-    description: "Write and submit the project proposal document.",
-    dueDate: "2023-12-15",
-    status: "To-Do",
-  },
-  // Add more tasks as needed
-]);
+// const tasks = ref([
+//   {
+//     id: 1,
+//     title: "Complete Project Proposal",
+//     description: "Write and submit the project proposal document.",
+//     dueDate: "2023-12-15",
+//     status: "To-Do",
+//   },
+//   // Add more tasks as needed
+// ]);
 </script>
 
 <style scoped>
