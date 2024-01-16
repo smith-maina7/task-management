@@ -2,10 +2,7 @@
   <div class="task-list">
     <div class="list-header">
       <h2>Task List</h2>
-      <Router-Link
-        :to="{ name: 'addTask' }"
-        class="add-tasks-btn"
-        @click="addTasks"
+      <Router-Link :to="{ name: 'addTask' }" class="add-tasks-btn"
         >Add Tasks</Router-Link
       >
     </div>

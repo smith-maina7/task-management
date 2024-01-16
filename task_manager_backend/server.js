@@ -4,12 +4,23 @@ require("@babel/register")({
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const { PrismaClient } = require("@prisma/client");
 
+const prisma = new PrismaClient();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(cors());
+
+app.get("/api/tasks", async (req, res) => {
+  try {
+    const tasks = await prisma.tasks.findMany();
+    res.json(tasks);
+  } catch (err) {
+    console.log("error in loading tasks", err);
+  }
+});
 
 app.post("/api/tasks", (req, res) => {
   const newTask = req.body;

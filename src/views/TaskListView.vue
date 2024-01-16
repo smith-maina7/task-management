@@ -8,18 +8,13 @@
 <script setup>
 // import { ref } from "vue";
 import TaskList from "@/components/TaskList.vue"; // Import the TaskList component
+import { onMounted } from "vue";
+import { useTaskStore } from "@/Stores/TaskStore";
 
-// Dummy tasks data for demonstration
-// const tasks = ref([
-//   {
-//     id: 1,
-//     title: "Complete Project Proposal",
-//     description: "Write and submit the project proposal document.",
-//     dueDate: "2023-12-15",
-//     status: "To-Do",
-//   },
-//   // Add more tasks as needed
-// ]);
+const store = useTaskStore();
+onMounted(() => {
+  store.getTasks();
+});
 </script>
 
 <style scoped>
