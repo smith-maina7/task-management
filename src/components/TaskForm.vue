@@ -45,11 +45,26 @@ const newTask = ref({
   date: "",
   status: "",
 });
-const submitTask = () => {
-  router.push({ name: "home" });
+const submitTask = async () => {
+  try {
+    const response = await fetch("http://localhost:3000/api/tasks", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newTask.value),
+    });
+    if (response.ok) {
+      const task = await response.json();
+      console.log("Task successfully created", task);
+
+      router.push({ name: "home" });
+    } else {
+      console.log("Task failed", response);
+    }
+  } catch (err) {
+    console.log("Task failed", err);
+  }
 };
 </script>
-
 <style scoped>
 /* Styles for Task Form component */
 
