@@ -12,12 +12,12 @@
       <input type="text" id="title" required v-model="newTask.title" />
     </div>
     <div class="form-group">
-      <label for="description">Description:</label>
-      <textarea id="description" v-model="newTask.discriptions"></textarea>
+      <label for="discription">Discription:</label>
+      <textarea id="discription" v-model="newTask.discription"></textarea>
     </div>
     <div class="form-group">
       <label for="dueDate">Due Date:</label>
-      <input type="date" id="dueDate" required v-model="newTask.date" />
+      <input type="date" id="dueDate" required v-model="newTask.due_date" />
     </div>
     <div class="form-group">
       <label for="status">Status:</label>
@@ -41,12 +41,14 @@ const router = useRouter();
 
 const newTask = ref({
   title: "",
-  discriptions: "",
-  date: "",
+  discription: "",
+  due_date: new Date().toISOString().substring(0, 10),
   status: "",
 });
+
 const submitTask = async () => {
   try {
+    newTask.value.due_date = new Date(newTask.value.due_date).toISOString();
     const response = await fetch("http://localhost:3000/api/tasks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

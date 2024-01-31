@@ -8,7 +8,7 @@
     </div>
     <div class="task-cards">
       <div
-        v-for="task in tasks"
+        v-for="task in store.tasks"
         :key="task.id"
         class="task-card"
         :style="{
@@ -17,8 +17,8 @@
         }"
       >
         <h3>{{ task.title }}</h3>
-        <p>{{ task.description }}</p>
-        <p>Due Date: {{ task.dueDate }}</p>
+        <p>{{ task.discription }}</p>
+        <p>Due Date: {{ task.due_date }}</p>
         <p>Status: {{ task.status }}</p>
       </div>
     </div>
@@ -29,7 +29,7 @@
 import { useTaskStore } from "@/Stores/TaskStore";
 
 const store = useTaskStore();
-const tasks = store.tasks;
+// const tasks = store.tasks;
 
 // Function to generate a random color
 const getRandomColor = () => {

@@ -9,9 +9,8 @@ export const useTaskStore = defineStore("taskStore", {
       try {
         const response = await fetch("http://localhost:3000/api/tasks");
 
-        const data = response.json();
+        const data = await response.json();
         this.tasks = data;
-        console.log(data);
       } catch (err) {
         console.log("error in loading tasks", err);
       }

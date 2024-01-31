@@ -22,10 +22,22 @@ app.get("/api/tasks", async (req, res) => {
   }
 });
 
-app.post("/api/tasks", (req, res) => {
-  const newTask = req.body;
-
-  res.status(200).json(newTask);
+app.post("/api/tasks", async (req, res) => {
+  const { title, discription, status, due_date } = req.body;
+  console.log(title, discription, status, due_date);
+  try {
+    const newTask = await prisma.tasks.create({
+      data: {
+        title,
+        discription,
+        status,
+        due_date,
+      },
+    });
+    res.status(200).json(newTask);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 app.listen(PORT, () => {

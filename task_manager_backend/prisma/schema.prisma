@@ -9,8 +9,8 @@ datasource db {
 
 model tasks {
   id          Int       @id @default(autoincrement())
-  title       String?   @db.VarChar(100)
-  discription String?
-  due_date    DateTime? @db.Date
-  status      String?   @db.VarChar(50)
+  title       String   @db.VarChar(100)
+  discription String
+  due_date    DateTime @db.Date
+  status      String   @db.VarChar(50)
 }
