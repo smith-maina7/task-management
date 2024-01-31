@@ -40,6 +40,20 @@ app.post("/api/tasks", async (req, res) => {
   }
 });
 
+app.patch("/api/tasks/:taskId", async (req, res) => {
+  const { taskId } = req.params;
+  const { status } = req.body;
+  try {
+    const updatedTask = await prisma.tasks.update({
+      where: { id: parseInt(taskId) },
+      data: { status },
+    });
+    res.json(updatedTask);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

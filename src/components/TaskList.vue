@@ -20,16 +20,23 @@
         <p>{{ task.discription }}</p>
         <p>Due Date: {{ task.due_date }}</p>
         <p>Status: {{ task.status }}</p>
+        <listOptions
+          :taskId="task.id"
+          :backgroundColor="getRandomColor()"
+          :color="getContrastColor()"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+// import { defineProps } from "vue";
 import { useTaskStore } from "@/Stores/TaskStore";
+import listOptions from "@/components/listOptions.vue";
 
 const store = useTaskStore();
-// const tasks = store.tasks;
+// const props = defineProps(["task"]);
 
 // Function to generate a random color
 const getRandomColor = () => {
