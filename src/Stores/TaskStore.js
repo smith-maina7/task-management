@@ -43,5 +43,22 @@ export const useTaskStore = defineStore("taskStore", {
         }
       }
     },
+    async deleteTask(taskId) {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/tasks/${taskId}`,
+          {
+            method: "DELETE",
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`Failed to delete task (HTTP ${response.status})`);
+        }
+        this.tasks = this.tasks.filter((t) => t.id !== taskId);
+      } catch (error) {
+        console.error("Error deleting task:", error);
+      }
+    },
   },
 });

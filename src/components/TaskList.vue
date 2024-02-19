@@ -16,6 +16,11 @@
           color: getContrastColor(),
         }"
       >
+        <i
+          class="fas fa-trash-alt delete-icon"
+          @click="deleteTask(task.id)"
+        ></i>
+        <!-- <i class="fas fa-edit edit-icon" @click="editTask()"></i> -->
         <h3>{{ task.title }}</h3>
         <p>{{ task.discription }}</p>
         <p>Due Date: {{ task.due_date }}</p>
@@ -31,12 +36,11 @@
 </template>
 
 <script setup>
-// import { defineProps } from "vue";
 import { useTaskStore } from "@/Stores/TaskStore";
 import listOptions from "@/components/listOptions.vue";
 
 const store = useTaskStore();
-// const props = defineProps(["task"]);
+const deleteTask = (taskId) => store.deleteTask(taskId);
 
 // Function to generate a random color
 const getRandomColor = () => {
@@ -82,6 +86,7 @@ const getContrastColor = () => {
   justify-content: space-between;
 }
 .task-card {
+  position: relative;
   padding: 20px;
   border-radius: 10px;
   width: 250px;
@@ -102,5 +107,28 @@ const getContrastColor = () => {
 .add-tasks-btn:hover {
   background-color: #2980b9;
   border-color: #2980b9;
+}
+.delete-icon,
+.edit-icon {
+  position: absolute;
+  /* Red color for the trash can icon */
+  cursor: pointer;
+  font-size: 20px;
+  margin-bottom: 3px;
+}
+.delete-icon {
+  top: 10px;
+  right: 8px;
+  font-size: 20px;
+}
+.edit-icon {
+  top: 10px;
+  right: 38px;
+  font-size: 20px;
+}
+
+.delete-icon:hover,
+.edit-icon:hover {
+  color: #bdb4b5; /* Darker red on hover */
 }
 </style>

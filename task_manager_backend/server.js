@@ -53,6 +53,17 @@ app.patch("/api/tasks/:taskId", async (req, res) => {
     console.log(error);
   }
 });
+app.delete("/api/tasks/:taskId", async (req, res) => {
+  const { taskId } = req.params;
+  try {
+    const deleteTask = await prisma.tasks.delete({
+      where: { id: parseInt(taskId) },
+    });
+    res.json(deleteTask);
+  } catch (err) {
+    console.error(err);
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
